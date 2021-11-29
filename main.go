@@ -11,7 +11,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/miguelmota/go-web3-example/greeter"
+	"github.com/hypergraphdev/go-web3-examples/greeter"
 	"io/ioutil"
 	"log"
 	"math/big"
