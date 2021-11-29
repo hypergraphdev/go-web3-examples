@@ -4,6 +4,7 @@
 package avatar
 
 import (
+	"errors"
 	"math/big"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
+	_ = errors.New
 	_ = big.NewInt
 	_ = strings.NewReader
 	_ = ethereum.NotFound
@@ -35,8 +37,14 @@ type IAvatarSeederSeed struct {
 	Glasses    *big.Int
 }
 
+// AvatarMetaData contains all meta data concerning the Avatar contract.
+var AvatarMetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_minter\",\"type\":\"address\"},{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"_descriptor\",\"type\":\"address\"},{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"_seeder\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"fromDelegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"toDelegate\",\"type\":\"address\"}],\"name\":\"DelegateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"previousBalance\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBalance\",\"type\":\"uint256\"}],\"name\":\"DelegateVotesChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DescriptorLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"descriptor\",\"type\":\"address\"}],\"name\":\"DescriptorUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"MinterLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"MinterUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"NounBurned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint48\",\"name\":\"background\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"body\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"accessory\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"head\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"glasses\",\"type\":\"uint48\"}],\"indexed\":false,\"internalType\":\"structIAvatarSeeder.Seed\",\"name\":\"seed\",\"type\":\"tuple\"}],\"name\":\"NounCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"preOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"NounExchanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"tokenURI\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"author\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fhash\",\"type\":\"uint256\"}],\"name\":\"NounRecorded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"noundersDAO\",\"type\":\"address\"}],\"name\":\"NoundersDAOUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"SeederLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractIAvatarSeeder\",\"name\":\"seeder\",\"type\":\"address\"}],\"name\":\"SeederUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DELEGATION_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_tokenURIMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nounId\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"checkpoints\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"fromBlock\",\"type\":\"uint32\"},{\"internalType\":\"uint96\",\"name\":\"votes\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"contractURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"dataURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegatee\",\"type\":\"address\"}],\"name\":\"delegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegatee\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"delegateBySig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"}],\"name\":\"delegates\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"descriptor\",\"outputs\":[{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getCurrentVotes\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNowSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"getPriorVotes\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isDescriptorLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isMinterLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isSeederLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockDescriptor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockSeeder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"nonces\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"numCheckpoints\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"seeder\",\"outputs\":[{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"seeds\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"background\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"body\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"accessory\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"head\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"glasses\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"newContractURIHash\",\"type\":\"string\"}],\"name\":\"setContractURIHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"_descriptor\",\"type\":\"address\"}],\"name\":\"setDescriptor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_minter\",\"type\":\"address\"}],\"name\":\"setMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"_seeder\",\"type\":\"address\"}],\"name\":\"setSeeder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"}],\"name\":\"votesToDelegate\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]",
+}
+
 // AvatarABI is the input ABI used to generate the binding from.
-const AvatarABI = "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_minter\",\"type\":\"address\"},{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"_descriptor\",\"type\":\"address\"},{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"_seeder\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"fromDelegate\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"toDelegate\",\"type\":\"address\"}],\"name\":\"DelegateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"delegate\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"previousBalance\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newBalance\",\"type\":\"uint256\"}],\"name\":\"DelegateVotesChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"DescriptorLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"descriptor\",\"type\":\"address\"}],\"name\":\"DescriptorUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"MinterLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"minter\",\"type\":\"address\"}],\"name\":\"MinterUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"NounBurned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint48\",\"name\":\"background\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"body\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"accessory\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"head\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"glasses\",\"type\":\"uint48\"}],\"indexed\":false,\"internalType\":\"structIAvatarSeeder.Seed\",\"name\":\"seed\",\"type\":\"tuple\"}],\"name\":\"NounCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"preOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"NounExchanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"tokenURI\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"author\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fhash\",\"type\":\"uint256\"}],\"name\":\"NounRecorded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"noundersDAO\",\"type\":\"address\"}],\"name\":\"NoundersDAOUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"SeederLocked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contractIAvatarSeeder\",\"name\":\"seeder\",\"type\":\"address\"}],\"name\":\"SeederUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DELEGATION_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DOMAIN_TYPEHASH\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_tokenURIMap\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nounId\",\"type\":\"uint256\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"checkpoints\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"fromBlock\",\"type\":\"uint32\"},{\"internalType\":\"uint96\",\"name\":\"votes\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"contractURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"dataURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegatee\",\"type\":\"address\"}],\"name\":\"delegate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegatee\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"delegateBySig\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"}],\"name\":\"delegates\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"descriptor\",\"outputs\":[{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getApproved\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getCurrentVotes\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getNowSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"blockNumber\",\"type\":\"uint256\"}],\"name\":\"getPriorVotes\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isDescriptorLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isMinterLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isSeederLocked\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockDescriptor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lockSeeder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"mint\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"nonces\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"numCheckpoints\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"seeder\",\"outputs\":[{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"seeds\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"background\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"body\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"accessory\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"head\",\"type\":\"uint48\"},{\"internalType\":\"uint48\",\"name\":\"glasses\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"newContractURIHash\",\"type\":\"string\"}],\"name\":\"setContractURIHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIAvatarDescriptor\",\"name\":\"_descriptor\",\"type\":\"address\"}],\"name\":\"setDescriptor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_minter\",\"type\":\"address\"}],\"name\":\"setMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contractIAvatarSeeder\",\"name\":\"_seeder\",\"type\":\"address\"}],\"name\":\"setSeeder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"tokenOfOwnerByIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"tokenURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"delegator\",\"type\":\"address\"}],\"name\":\"votesToDelegate\",\"outputs\":[{\"internalType\":\"uint96\",\"name\":\"\",\"type\":\"uint96\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
+// Deprecated: Use AvatarMetaData.ABI instead.
+var AvatarABI = AvatarMetaData.ABI
 
 // Avatar is an auto generated Go binding around an Ethereum contract.
 type Avatar struct {
@@ -146,7 +154,7 @@ func bindAvatar(address common.Address, caller bind.ContractCaller, transactor b
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Avatar *AvatarRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+func (_Avatar *AvatarRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
 	return _Avatar.Contract.AvatarCaller.contract.Call(opts, result, method, params...)
 }
 
@@ -165,7 +173,7 @@ func (_Avatar *AvatarRaw) Transact(opts *bind.TransactOpts, method string, param
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Avatar *AvatarCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
+func (_Avatar *AvatarCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
 	return _Avatar.Contract.contract.Call(opts, result, method, params...)
 }
 
@@ -184,12 +192,17 @@ func (_Avatar *AvatarTransactorRaw) Transact(opts *bind.TransactOpts, method str
 //
 // Solidity: function DELEGATION_TYPEHASH() view returns(bytes32)
 func (_Avatar *AvatarCaller) DELEGATIONTYPEHASH(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "DELEGATION_TYPEHASH")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "DELEGATION_TYPEHASH")
+
+	if err != nil {
+		return *new([32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([32]byte)).(*[32]byte)
+
+	return out0, err
+
 }
 
 // DELEGATIONTYPEHASH is a free data retrieval call binding the contract method 0xe7a324dc.
@@ -210,12 +223,17 @@ func (_Avatar *AvatarCallerSession) DELEGATIONTYPEHASH() ([32]byte, error) {
 //
 // Solidity: function DOMAIN_TYPEHASH() view returns(bytes32)
 func (_Avatar *AvatarCaller) DOMAINTYPEHASH(opts *bind.CallOpts) ([32]byte, error) {
-	var (
-		ret0 = new([32]byte)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "DOMAIN_TYPEHASH")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "DOMAIN_TYPEHASH")
+
+	if err != nil {
+		return *new([32]byte), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new([32]byte)).(*[32]byte)
+
+	return out0, err
+
 }
 
 // DOMAINTYPEHASH is a free data retrieval call binding the contract method 0x20606b70.
@@ -236,12 +254,17 @@ func (_Avatar *AvatarCallerSession) DOMAINTYPEHASH() ([32]byte, error) {
 //
 // Solidity: function _tokenURIMap(uint256 ) view returns(string)
 func (_Avatar *AvatarCaller) TokenURIMap(opts *bind.CallOpts, arg0 *big.Int) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "_tokenURIMap", arg0)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "_tokenURIMap", arg0)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // TokenURIMap is a free data retrieval call binding the contract method 0x3589cac4.
@@ -262,12 +285,17 @@ func (_Avatar *AvatarCallerSession) TokenURIMap(arg0 *big.Int) (string, error) {
 //
 // Solidity: function balanceOf(address owner) view returns(uint256)
 func (_Avatar *AvatarCaller) BalanceOf(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "balanceOf", owner)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "balanceOf", owner)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
@@ -291,13 +319,22 @@ func (_Avatar *AvatarCaller) Checkpoints(opts *bind.CallOpts, arg0 common.Addres
 	FromBlock uint32
 	Votes     *big.Int
 }, error) {
-	ret := new(struct {
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "checkpoints", arg0, arg1)
+
+	outstruct := new(struct {
 		FromBlock uint32
 		Votes     *big.Int
 	})
-	out := ret
-	err := _Avatar.contract.Call(opts, out, "checkpoints", arg0, arg1)
-	return *ret, err
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.FromBlock = *abi.ConvertType(out[0], new(uint32)).(*uint32)
+	outstruct.Votes = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
+
+	return *outstruct, err
+
 }
 
 // Checkpoints is a free data retrieval call binding the contract method 0xf1127ed8.
@@ -324,12 +361,17 @@ func (_Avatar *AvatarCallerSession) Checkpoints(arg0 common.Address, arg1 uint32
 //
 // Solidity: function contractURI() view returns(string)
 func (_Avatar *AvatarCaller) ContractURI(opts *bind.CallOpts) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "contractURI")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "contractURI")
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // ContractURI is a free data retrieval call binding the contract method 0xe8a3d485.
@@ -350,12 +392,17 @@ func (_Avatar *AvatarCallerSession) ContractURI() (string, error) {
 //
 // Solidity: function dataURI(uint256 tokenId) view returns(string)
 func (_Avatar *AvatarCaller) DataURI(opts *bind.CallOpts, tokenId *big.Int) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "dataURI", tokenId)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "dataURI", tokenId)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // DataURI is a free data retrieval call binding the contract method 0x5ac1e3bb.
@@ -376,12 +423,17 @@ func (_Avatar *AvatarCallerSession) DataURI(tokenId *big.Int) (string, error) {
 //
 // Solidity: function decimals() view returns(uint8)
 func (_Avatar *AvatarCaller) Decimals(opts *bind.CallOpts) (uint8, error) {
-	var (
-		ret0 = new(uint8)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "decimals")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "decimals")
+
+	if err != nil {
+		return *new(uint8), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint8)).(*uint8)
+
+	return out0, err
+
 }
 
 // Decimals is a free data retrieval call binding the contract method 0x313ce567.
@@ -402,12 +454,17 @@ func (_Avatar *AvatarCallerSession) Decimals() (uint8, error) {
 //
 // Solidity: function delegates(address delegator) view returns(address)
 func (_Avatar *AvatarCaller) Delegates(opts *bind.CallOpts, delegator common.Address) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "delegates", delegator)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "delegates", delegator)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // Delegates is a free data retrieval call binding the contract method 0x587cde1e.
@@ -428,12 +485,17 @@ func (_Avatar *AvatarCallerSession) Delegates(delegator common.Address) (common.
 //
 // Solidity: function descriptor() view returns(address)
 func (_Avatar *AvatarCaller) Descriptor(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "descriptor")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "descriptor")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // Descriptor is a free data retrieval call binding the contract method 0x303e74df.
@@ -454,12 +516,17 @@ func (_Avatar *AvatarCallerSession) Descriptor() (common.Address, error) {
 //
 // Solidity: function getApproved(uint256 tokenId) view returns(address)
 func (_Avatar *AvatarCaller) GetApproved(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "getApproved", tokenId)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "getApproved", tokenId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // GetApproved is a free data retrieval call binding the contract method 0x081812fc.
@@ -480,12 +547,17 @@ func (_Avatar *AvatarCallerSession) GetApproved(tokenId *big.Int) (common.Addres
 //
 // Solidity: function getCurrentVotes(address account) view returns(uint96)
 func (_Avatar *AvatarCaller) GetCurrentVotes(opts *bind.CallOpts, account common.Address) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "getCurrentVotes", account)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "getCurrentVotes", account)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // GetCurrentVotes is a free data retrieval call binding the contract method 0xb4b5ea57.
@@ -506,12 +578,17 @@ func (_Avatar *AvatarCallerSession) GetCurrentVotes(account common.Address) (*bi
 //
 // Solidity: function getNowSupply() view returns(uint256)
 func (_Avatar *AvatarCaller) GetNowSupply(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "getNowSupply")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "getNowSupply")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // GetNowSupply is a free data retrieval call binding the contract method 0x7bd7ecef.
@@ -532,12 +609,17 @@ func (_Avatar *AvatarCallerSession) GetNowSupply() (*big.Int, error) {
 //
 // Solidity: function getPriorVotes(address account, uint256 blockNumber) view returns(uint96)
 func (_Avatar *AvatarCaller) GetPriorVotes(opts *bind.CallOpts, account common.Address, blockNumber *big.Int) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "getPriorVotes", account, blockNumber)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "getPriorVotes", account, blockNumber)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // GetPriorVotes is a free data retrieval call binding the contract method 0x782d6fe1.
@@ -558,12 +640,17 @@ func (_Avatar *AvatarCallerSession) GetPriorVotes(account common.Address, blockN
 //
 // Solidity: function isApprovedForAll(address owner, address operator) view returns(bool)
 func (_Avatar *AvatarCaller) IsApprovedForAll(opts *bind.CallOpts, owner common.Address, operator common.Address) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "isApprovedForAll", owner, operator)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "isApprovedForAll", owner, operator)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
 }
 
 // IsApprovedForAll is a free data retrieval call binding the contract method 0xe985e9c5.
@@ -584,12 +671,17 @@ func (_Avatar *AvatarCallerSession) IsApprovedForAll(owner common.Address, opera
 //
 // Solidity: function isDescriptorLocked() view returns(bool)
 func (_Avatar *AvatarCaller) IsDescriptorLocked(opts *bind.CallOpts) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "isDescriptorLocked")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "isDescriptorLocked")
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
 }
 
 // IsDescriptorLocked is a free data retrieval call binding the contract method 0xc1b8e4e1.
@@ -610,12 +702,17 @@ func (_Avatar *AvatarCallerSession) IsDescriptorLocked() (bool, error) {
 //
 // Solidity: function isMinterLocked() view returns(bool)
 func (_Avatar *AvatarCaller) IsMinterLocked(opts *bind.CallOpts) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "isMinterLocked")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "isMinterLocked")
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
 }
 
 // IsMinterLocked is a free data retrieval call binding the contract method 0x1e688e10.
@@ -636,12 +733,17 @@ func (_Avatar *AvatarCallerSession) IsMinterLocked() (bool, error) {
 //
 // Solidity: function isSeederLocked() view returns(bool)
 func (_Avatar *AvatarCaller) IsSeederLocked(opts *bind.CallOpts) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "isSeederLocked")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "isSeederLocked")
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
 }
 
 // IsSeederLocked is a free data retrieval call binding the contract method 0xc8fc0c23.
@@ -662,12 +764,17 @@ func (_Avatar *AvatarCallerSession) IsSeederLocked() (bool, error) {
 //
 // Solidity: function minter() view returns(address)
 func (_Avatar *AvatarCaller) Minter(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "minter")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "minter")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // Minter is a free data retrieval call binding the contract method 0x07546172.
@@ -688,12 +795,17 @@ func (_Avatar *AvatarCallerSession) Minter() (common.Address, error) {
 //
 // Solidity: function name() view returns(string)
 func (_Avatar *AvatarCaller) Name(opts *bind.CallOpts) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "name")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "name")
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // Name is a free data retrieval call binding the contract method 0x06fdde03.
@@ -714,12 +826,17 @@ func (_Avatar *AvatarCallerSession) Name() (string, error) {
 //
 // Solidity: function nonces(address ) view returns(uint256)
 func (_Avatar *AvatarCaller) Nonces(opts *bind.CallOpts, arg0 common.Address) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "nonces", arg0)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "nonces", arg0)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // Nonces is a free data retrieval call binding the contract method 0x7ecebe00.
@@ -740,12 +857,17 @@ func (_Avatar *AvatarCallerSession) Nonces(arg0 common.Address) (*big.Int, error
 //
 // Solidity: function numCheckpoints(address ) view returns(uint32)
 func (_Avatar *AvatarCaller) NumCheckpoints(opts *bind.CallOpts, arg0 common.Address) (uint32, error) {
-	var (
-		ret0 = new(uint32)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "numCheckpoints", arg0)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "numCheckpoints", arg0)
+
+	if err != nil {
+		return *new(uint32), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(uint32)).(*uint32)
+
+	return out0, err
+
 }
 
 // NumCheckpoints is a free data retrieval call binding the contract method 0x6fcfff45.
@@ -766,12 +888,17 @@ func (_Avatar *AvatarCallerSession) NumCheckpoints(arg0 common.Address) (uint32,
 //
 // Solidity: function owner() view returns(address)
 func (_Avatar *AvatarCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "owner")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "owner")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
@@ -792,12 +919,17 @@ func (_Avatar *AvatarCallerSession) Owner() (common.Address, error) {
 //
 // Solidity: function ownerOf(uint256 tokenId) view returns(address)
 func (_Avatar *AvatarCaller) OwnerOf(opts *bind.CallOpts, tokenId *big.Int) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "ownerOf", tokenId)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "ownerOf", tokenId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // OwnerOf is a free data retrieval call binding the contract method 0x6352211e.
@@ -818,12 +950,17 @@ func (_Avatar *AvatarCallerSession) OwnerOf(tokenId *big.Int) (common.Address, e
 //
 // Solidity: function seeder() view returns(address)
 func (_Avatar *AvatarCaller) Seeder(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "seeder")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "seeder")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
 }
 
 // Seeder is a free data retrieval call binding the contract method 0x684931ed.
@@ -850,16 +987,28 @@ func (_Avatar *AvatarCaller) Seeds(opts *bind.CallOpts, arg0 *big.Int) (struct {
 	Head       *big.Int
 	Glasses    *big.Int
 }, error) {
-	ret := new(struct {
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "seeds", arg0)
+
+	outstruct := new(struct {
 		Background *big.Int
 		Body       *big.Int
 		Accessory  *big.Int
 		Head       *big.Int
 		Glasses    *big.Int
 	})
-	out := ret
-	err := _Avatar.contract.Call(opts, out, "seeds", arg0)
-	return *ret, err
+	if err != nil {
+		return *outstruct, err
+	}
+
+	outstruct.Background = *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+	outstruct.Body = *abi.ConvertType(out[1], new(*big.Int)).(**big.Int)
+	outstruct.Accessory = *abi.ConvertType(out[2], new(*big.Int)).(**big.Int)
+	outstruct.Head = *abi.ConvertType(out[3], new(*big.Int)).(**big.Int)
+	outstruct.Glasses = *abi.ConvertType(out[4], new(*big.Int)).(**big.Int)
+
+	return *outstruct, err
+
 }
 
 // Seeds is a free data retrieval call binding the contract method 0xf0503e80.
@@ -892,12 +1041,17 @@ func (_Avatar *AvatarCallerSession) Seeds(arg0 *big.Int) (struct {
 //
 // Solidity: function supportsInterface(bytes4 interfaceId) view returns(bool)
 func (_Avatar *AvatarCaller) SupportsInterface(opts *bind.CallOpts, interfaceId [4]byte) (bool, error) {
-	var (
-		ret0 = new(bool)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "supportsInterface", interfaceId)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "supportsInterface", interfaceId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
 }
 
 // SupportsInterface is a free data retrieval call binding the contract method 0x01ffc9a7.
@@ -918,12 +1072,17 @@ func (_Avatar *AvatarCallerSession) SupportsInterface(interfaceId [4]byte) (bool
 //
 // Solidity: function symbol() view returns(string)
 func (_Avatar *AvatarCaller) Symbol(opts *bind.CallOpts) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "symbol")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "symbol")
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // Symbol is a free data retrieval call binding the contract method 0x95d89b41.
@@ -944,12 +1103,17 @@ func (_Avatar *AvatarCallerSession) Symbol() (string, error) {
 //
 // Solidity: function tokenByIndex(uint256 index) view returns(uint256)
 func (_Avatar *AvatarCaller) TokenByIndex(opts *bind.CallOpts, index *big.Int) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "tokenByIndex", index)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "tokenByIndex", index)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // TokenByIndex is a free data retrieval call binding the contract method 0x4f6ccce7.
@@ -970,12 +1134,17 @@ func (_Avatar *AvatarCallerSession) TokenByIndex(index *big.Int) (*big.Int, erro
 //
 // Solidity: function tokenOfOwnerByIndex(address owner, uint256 index) view returns(uint256)
 func (_Avatar *AvatarCaller) TokenOfOwnerByIndex(opts *bind.CallOpts, owner common.Address, index *big.Int) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "tokenOfOwnerByIndex", owner, index)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "tokenOfOwnerByIndex", owner, index)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // TokenOfOwnerByIndex is a free data retrieval call binding the contract method 0x2f745c59.
@@ -996,12 +1165,17 @@ func (_Avatar *AvatarCallerSession) TokenOfOwnerByIndex(owner common.Address, in
 //
 // Solidity: function tokenURI(uint256 tokenId) view returns(string)
 func (_Avatar *AvatarCaller) TokenURI(opts *bind.CallOpts, tokenId *big.Int) (string, error) {
-	var (
-		ret0 = new(string)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "tokenURI", tokenId)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "tokenURI", tokenId)
+
+	if err != nil {
+		return *new(string), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(string)).(*string)
+
+	return out0, err
+
 }
 
 // TokenURI is a free data retrieval call binding the contract method 0xc87b56dd.
@@ -1022,12 +1196,17 @@ func (_Avatar *AvatarCallerSession) TokenURI(tokenId *big.Int) (string, error) {
 //
 // Solidity: function totalSupply() view returns(uint256)
 func (_Avatar *AvatarCaller) TotalSupply(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "totalSupply")
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "totalSupply")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // TotalSupply is a free data retrieval call binding the contract method 0x18160ddd.
@@ -1048,12 +1227,17 @@ func (_Avatar *AvatarCallerSession) TotalSupply() (*big.Int, error) {
 //
 // Solidity: function votesToDelegate(address delegator) view returns(uint96)
 func (_Avatar *AvatarCaller) VotesToDelegate(opts *bind.CallOpts, delegator common.Address) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _Avatar.contract.Call(opts, out, "votesToDelegate", delegator)
-	return *ret0, err
+	var out []interface{}
+	err := _Avatar.contract.Call(opts, &out, "votesToDelegate", delegator)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
 }
 
 // VotesToDelegate is a free data retrieval call binding the contract method 0xe9580e91.
@@ -1606,6 +1790,7 @@ func (_Avatar *AvatarFilterer) ParseApproval(log types.Log) (*AvatarApproval, er
 	if err := _Avatar.contract.UnpackLog(event, "Approval", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1759,6 +1944,7 @@ func (_Avatar *AvatarFilterer) ParseApprovalForAll(log types.Log) (*AvatarApprov
 	if err := _Avatar.contract.UnpackLog(event, "ApprovalForAll", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -1920,6 +2106,7 @@ func (_Avatar *AvatarFilterer) ParseDelegateChanged(log types.Log) (*AvatarDeleg
 	if err := _Avatar.contract.UnpackLog(event, "DelegateChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2065,6 +2252,7 @@ func (_Avatar *AvatarFilterer) ParseDelegateVotesChanged(log types.Log) (*Avatar
 	if err := _Avatar.contract.UnpackLog(event, "DelegateVotesChanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2197,6 +2385,7 @@ func (_Avatar *AvatarFilterer) ParseDescriptorLocked(log types.Log) (*AvatarDesc
 	if err := _Avatar.contract.UnpackLog(event, "DescriptorLocked", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2330,6 +2519,7 @@ func (_Avatar *AvatarFilterer) ParseDescriptorUpdated(log types.Log) (*AvatarDes
 	if err := _Avatar.contract.UnpackLog(event, "DescriptorUpdated", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2462,6 +2652,7 @@ func (_Avatar *AvatarFilterer) ParseMinterLocked(log types.Log) (*AvatarMinterLo
 	if err := _Avatar.contract.UnpackLog(event, "MinterLocked", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2595,6 +2786,7 @@ func (_Avatar *AvatarFilterer) ParseMinterUpdated(log types.Log) (*AvatarMinterU
 	if err := _Avatar.contract.UnpackLog(event, "MinterUpdated", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2738,6 +2930,7 @@ func (_Avatar *AvatarFilterer) ParseNounBurned(log types.Log) (*AvatarNounBurned
 	if err := _Avatar.contract.UnpackLog(event, "NounBurned", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -2882,6 +3075,7 @@ func (_Avatar *AvatarFilterer) ParseNounCreated(log types.Log) (*AvatarNounCreat
 	if err := _Avatar.contract.UnpackLog(event, "NounCreated", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3017,6 +3211,7 @@ func (_Avatar *AvatarFilterer) ParseNounExchanged(log types.Log) (*AvatarNounExc
 	if err := _Avatar.contract.UnpackLog(event, "NounExchanged", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3152,6 +3347,7 @@ func (_Avatar *AvatarFilterer) ParseNounRecorded(log types.Log) (*AvatarNounReco
 	if err := _Avatar.contract.UnpackLog(event, "NounRecorded", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3285,6 +3481,7 @@ func (_Avatar *AvatarFilterer) ParseNoundersDAOUpdated(log types.Log) (*AvatarNo
 	if err := _Avatar.contract.UnpackLog(event, "NoundersDAOUpdated", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3437,6 +3634,7 @@ func (_Avatar *AvatarFilterer) ParseOwnershipTransferred(log types.Log) (*Avatar
 	if err := _Avatar.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3569,6 +3767,7 @@ func (_Avatar *AvatarFilterer) ParseSeederLocked(log types.Log) (*AvatarSeederLo
 	if err := _Avatar.contract.UnpackLog(event, "SeederLocked", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3702,6 +3901,7 @@ func (_Avatar *AvatarFilterer) ParseSeederUpdated(log types.Log) (*AvatarSeederU
 	if err := _Avatar.contract.UnpackLog(event, "SeederUpdated", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
 
@@ -3863,5 +4063,6 @@ func (_Avatar *AvatarFilterer) ParseTransfer(log types.Log) (*AvatarTransfer, er
 	if err := _Avatar.contract.UnpackLog(event, "Transfer", log); err != nil {
 		return nil, err
 	}
+	event.Raw = log
 	return event, nil
 }
